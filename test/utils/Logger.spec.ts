@@ -111,7 +111,7 @@ describe('Logger', () => {
     expect(stdoutSpy.callCount).to.equal(1, 'only error level logs should be emitted');
   });
 
-  it('error and warn level logs should be emitted when when logLevel is WARN', () => {
+  it('only error and warn level logs should be emitted when when logLevel is WARN', () => {
     logger = new Logger('LogName', LogLevel.WARN);
     logger.error('error message');
     expect(stdoutSpy.callCount).to.equal(1, 'only error and warn level logs should be emitted');
@@ -123,7 +123,7 @@ describe('Logger', () => {
     expect(stdoutSpy.callCount).to.equal(2, 'only error and warn level logs should be emitted');
   });
 
-  it('error, warn, and info level logs should be emitted when when logLevel is INFO', () => {
+  it('only error, warn, and info level logs should be emitted when when logLevel is INFO', () => {
     logger = new Logger('LogName', LogLevel.INFO);
     logger.error('error message');
     expect(stdoutSpy.callCount).to.equal(1, 'only error, warn, and info level logs should be emitted');
