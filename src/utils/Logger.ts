@@ -8,18 +8,25 @@ export default class Logger {
   }
 
   public error(log: string): void {
-    process.stdout.emit(this.formatLog(log));
+    this.log(LogLevel.ERROR, log);
   }
 
   public warn(log: string): void {
-    process.stdout.emit(this.formatLog(log));
+    this.log(LogLevel.WARN, log);
   }
 
   public info(log: string): void {
-    process.stdout.emit(this.formatLog(log));
+    this.log(LogLevel.INFO, log);
   }
 
   public debug(log: string): void {
+    this.log(LogLevel.DEBUG, log);
+  }
+
+  private log(logLevel: LogLevel, log: string): void {
+    if (this.logLevel === LogLevel.OFF) {
+      return;
+    }
     process.stdout.emit(this.formatLog(log));
   }
 
