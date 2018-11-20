@@ -89,13 +89,21 @@ describe('Logger', () => {
 
   it('all logs should be emitted when when logLevel is DEBUG', () => {
     logger = new Logger('LogName', LogLevel.DEBUG);
+
     logger.error('error message');
+    expect(stdoutWriteSpy.args[0][0]).to.equal('[1984-05-07 03:09:05.008] [ERROR] LogName - error message');
     expect(stdoutWriteSpy.callCount).to.equal(1, 'All logs should have been emitted');
+
     logger.warn('warn message');
     expect(stdoutWriteSpy.callCount).to.equal(2, 'All logs should have been emitted');
+    expect(stdoutWriteSpy.args[1][0]).to.equal('[1984-05-07 03:09:05.008] [WARN] LogName - warn message');
+
     logger.info('info message');
+    expect(stdoutWriteSpy.args[2][0]).to.equal('[1984-05-07 03:09:05.008] [INFO] LogName - info message');
     expect(stdoutWriteSpy.callCount).to.equal(3, 'All logs should have been emitted');
+
     logger.debug('debug message');
+    expect(stdoutWriteSpy.args[3][0]).to.equal('[1984-05-07 03:09:05.008] [DEBUG] LogName - debug message');
     expect(stdoutWriteSpy.callCount).to.equal(4, 'All logs should have been emitted');
   });
 

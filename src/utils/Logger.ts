@@ -25,7 +25,7 @@ export default class Logger {
 
   private log(logLevel: LogLevel, log: string): void {
     if (this.determineIfLogShouldBeEmitted(logLevel)) {
-      process.stdout.write(this.formatLog(log));
+      process.stdout.write(this.formatLog(log, logLevel));
     }
   }
 
@@ -56,10 +56,10 @@ export default class Logger {
     return LogLevel.INFO;
   }
 
-  private formatLog(message: string): string {
+  private formatLog(message: string, messageLogLevel: LogLevel): string {
     const now = new Date();
     const timestamp = getTimeStamp(now);
-    const level = this.logLevel.toUpperCase();
+    const level = messageLogLevel.toUpperCase();
     return `[${timestamp}] [${level}] ${this.loggerName} - ${message}`;
 
     function getTimeStamp(date: Date): string {
