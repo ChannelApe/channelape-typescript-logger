@@ -62,4 +62,16 @@ describe('Logger', () => {
     const expectedMessage = '[1984-05-07 03:09:05.008] [DEBUG] LogName - debug message';
     expect(stdoutSpy.args[0][0]).to.equal(expectedMessage);
   });
+
+  it('no logs should be emitted when when logLevel is OFF', () => {
+    logger = new Logger('LogName', LogLevel.OFF);
+    logger.error('error message');
+    expect(stdoutSpy.called).to.equal(false, 'No logs should have been emitted when error was called');
+    logger.warn('warn message');
+    expect(stdoutSpy.called).to.equal(false, 'No logs should have been emitted when warn was called');
+    logger.info('info message');
+    expect(stdoutSpy.called).to.equal(false, 'No logs should have been emitted when info was called');
+    logger.debug('debug message');
+    expect(stdoutSpy.called).to.equal(false, 'No logs should have been emitted when debug was called');
+  });
 });
