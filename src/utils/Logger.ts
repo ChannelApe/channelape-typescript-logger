@@ -60,7 +60,7 @@ export default class Logger {
     const now = new Date();
     const timestamp = getTimeStamp(now);
     const level = messageLogLevel.toUpperCase();
-    return `[${timestamp}] [${level}] ${this.loggerName} - ${message}`;
+    return `[${timestamp}] [${level}] ${this.loggerName} - ${message}\r\n`;
 
     function getTimeStamp(date: Date): string {
       const yyyMmDd = `${date.getFullYear()}-${getMonth(date)}-${getDay(date)}`;

@@ -31,35 +31,35 @@ describe('Logger', () => {
     logger = new Logger('name', 'ERROR');
     logger.error('This error is being reported by a logger with a string for a LogLevel');
     const expectedMessage =
-      '[1984-05-07 03:09:05.008] [ERROR] name - This error is being reported by a logger with a string for a LogLevel';
+  '[1984-05-07 03:09:05.008] [ERROR] name - This error is being reported by a logger with a string for a LogLevel\r\n';
     expect(stdoutWriteSpy.args[0][0]).to.equal(expectedMessage);
   });
 
   it('error() should log when logLevel is ERROR or above', () => {
     logger = new Logger('LogName', LogLevel.ERROR);
     logger.error('error message');
-    const expectedMessage = '[1984-05-07 03:09:05.008] [ERROR] LogName - error message';
+    const expectedMessage = '[1984-05-07 03:09:05.008] [ERROR] LogName - error message\r\n';
     expect(stdoutWriteSpy.args[0][0]).to.equal(expectedMessage);
   });
 
   it('warn() should log when logLevel is WARN or above', () => {
     logger = new Logger('LogName', LogLevel.WARN);
     logger.warn('warn message');
-    const expectedMessage = '[1984-05-07 03:09:05.008] [WARN] LogName - warn message';
+    const expectedMessage = '[1984-05-07 03:09:05.008] [WARN] LogName - warn message\r\n';
     expect(stdoutWriteSpy.args[0][0]).to.equal(expectedMessage);
   });
 
   it('info() should log when logLevel is INFO or above', () => {
     logger = new Logger('LogName', LogLevel.INFO);
     logger.info('info message');
-    const expectedMessage = '[1984-05-07 03:09:05.008] [INFO] LogName - info message';
+    const expectedMessage = '[1984-05-07 03:09:05.008] [INFO] LogName - info message\r\n';
     expect(stdoutWriteSpy.args[0][0]).to.equal(expectedMessage);
   });
 
   it('debug() should log when logLevel is DEBUG or above', () => {
     logger = new Logger('LogName', LogLevel.DEBUG);
     logger.debug('debug message');
-    const expectedMessage = '[1984-05-07 03:09:05.008] [DEBUG] LogName - debug message';
+    const expectedMessage = '[1984-05-07 03:09:05.008] [DEBUG] LogName - debug message\r\n';
     expect(stdoutWriteSpy.args[0][0]).to.equal(expectedMessage);
   });
 
@@ -91,19 +91,19 @@ describe('Logger', () => {
     logger = new Logger('LogName', LogLevel.DEBUG);
 
     logger.error('error message');
-    expect(stdoutWriteSpy.args[0][0]).to.equal('[1984-05-07 03:09:05.008] [ERROR] LogName - error message');
+    expect(stdoutWriteSpy.args[0][0]).to.equal('[1984-05-07 03:09:05.008] [ERROR] LogName - error message\r\n');
     expect(stdoutWriteSpy.callCount).to.equal(1, 'All logs should have been emitted');
 
     logger.warn('warn message');
     expect(stdoutWriteSpy.callCount).to.equal(2, 'All logs should have been emitted');
-    expect(stdoutWriteSpy.args[1][0]).to.equal('[1984-05-07 03:09:05.008] [WARN] LogName - warn message');
+    expect(stdoutWriteSpy.args[1][0]).to.equal('[1984-05-07 03:09:05.008] [WARN] LogName - warn message\r\n');
 
     logger.info('info message');
-    expect(stdoutWriteSpy.args[2][0]).to.equal('[1984-05-07 03:09:05.008] [INFO] LogName - info message');
+    expect(stdoutWriteSpy.args[2][0]).to.equal('[1984-05-07 03:09:05.008] [INFO] LogName - info message\r\n');
     expect(stdoutWriteSpy.callCount).to.equal(3, 'All logs should have been emitted');
 
     logger.debug('debug message');
-    expect(stdoutWriteSpy.args[3][0]).to.equal('[1984-05-07 03:09:05.008] [DEBUG] LogName - debug message');
+    expect(stdoutWriteSpy.args[3][0]).to.equal('[1984-05-07 03:09:05.008] [DEBUG] LogName - debug message\r\n');
     expect(stdoutWriteSpy.callCount).to.equal(4, 'All logs should have been emitted');
   });
 
