@@ -24,10 +24,26 @@ export default class Logger {
   }
 
   private log(logLevel: LogLevel, log: string): void {
-    if (this.logLevel === LogLevel.OFF) {
-      return;
+    if (this.determineIfLogShouldBeEmitted(logLevel)) {
+      process.stdout.emit(this.formatLog(log));
     }
-    process.stdout.emit(this.formatLog(log));
+  }
+
+  private determineIfLogShouldBeEmitted(logLevel: LogLevel): boolean {
+    if (this.logLevel === LogLevel.VERBOSE || this.logLevel === LogLevel.DEBUG) {
+      return true;
+    }
+    if (this.logLevel === LogLevel.INFO &&
+        (logLevel === LogLevel.INFO || logLevel === LogLevel.WARN || logLevel === LogLevel.ERROR)) {
+      return true;
+    }
+    if (this.logLevel === LogLevel.WARN && (logLevel === LogLevel.WARN || logLevel === LogLevel.ERROR)) {
+      return true;
+    }
+    if (this.logLevel === LogLevel.ERROR && logLevel === LogLevel.ERROR) {
+      return true;
+    }
+    return false;
   }
 
   private getLogLevel(logLevel: LogLevel | string): LogLevel {
