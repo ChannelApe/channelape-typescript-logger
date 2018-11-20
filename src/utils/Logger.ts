@@ -25,7 +25,7 @@ export default class Logger {
 
   private log(logLevel: LogLevel, log: string): void {
     if (this.determineIfLogShouldBeEmitted(logLevel)) {
-      process.stdout.emit(this.formatLog(log));
+      process.stdout.write(this.formatLog(log));
     }
   }
 
