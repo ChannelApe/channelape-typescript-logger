@@ -8,19 +8,19 @@ export default class Logger {
   }
 
   public error(log: string): void {
-    process.stdout.emit(this.logFormatter(log));
+    process.stdout.emit(this.formatLog(log));
   }
 
   public warn(log: string): void {
-    process.stdout.emit(this.logFormatter(log));
+    process.stdout.emit(this.formatLog(log));
   }
 
   public info(log: string): void {
-    process.stdout.emit(this.logFormatter(log));
+    process.stdout.emit(this.formatLog(log));
   }
 
   public debug(log: string): void {
-    process.stdout.emit(this.logFormatter(log));
+    process.stdout.emit(this.formatLog(log));
   }
 
   private getLogLevel(logLevel: LogLevel | string): LogLevel {
@@ -33,7 +33,7 @@ export default class Logger {
     return LogLevel.INFO;
   }
 
-  private logFormatter(message: string): string {
+  private formatLog(message: string): string {
     const now = new Date();
     const timestamp = getTimeStamp(now);
     const level = this.logLevel.toUpperCase();
