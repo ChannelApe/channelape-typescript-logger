@@ -1,32 +1,26 @@
-import * as util from 'util';
-import * as winston from 'winston';
 import LogLevel from '../model/LogLevel';
 
-const LOG_FORMAT = '%s - %s';
-
 export default class Logger {
-  private readonly logger: winston.LoggerInstance;
   private readonly logLevel: LogLevel;
 
   constructor(private readonly loggerName: string, logLevel: LogLevel | string) {
     this.logLevel = this.getLogLevel(logLevel);
-    this.logger = this.createLogger();
   }
 
   public error(log: string): void {
-    this.logger.error(util.format(LOG_FORMAT, this.loggerName, log));
+    process.stdout.emit(this.logFormatter(log));
   }
 
   public warn(log: string): void {
-    this.logger.warn(util.format(LOG_FORMAT, this.loggerName, log));
+    process.stdout.emit(this.logFormatter(log));
   }
 
   public info(log: string): void {
-    this.logger.info(util.format(LOG_FORMAT, this.loggerName, log));
+    process.stdout.emit(this.logFormatter(log));
   }
 
   public debug(log: string): void {
-    this.logger.debug(util.format(LOG_FORMAT, this.loggerName, log));
+    process.stdout.emit(this.logFormatter(log));
   }
 
   private getLogLevel(logLevel: LogLevel | string): LogLevel {
@@ -39,18 +33,11 @@ export default class Logger {
     return LogLevel.INFO;
   }
 
-  private createLogger() {
-    return new winston.Logger({
-      transports: [new winston.transports.Console({ formatter: this.logFormatter })],
-      level: this.logLevel
-    });
-  }
-
-  private logFormatter(options: any): string {
+  private logFormatter(message: string): string {
     const now = new Date();
     const timestamp = getTimeStamp(now);
-    const level = options.level.toUpperCase();
-    return `[${timestamp}] [${level}] ${options.message}`;
+    const level = this.logLevel.toUpperCase();
+    return `[${timestamp}] [${level}] ${this.loggerName} - ${message}`;
 
     function getTimeStamp(date: Date): string {
       const yyyMmDd = `${date.getFullYear()}-${getMonth(date)}-${getDay(date)}`;
