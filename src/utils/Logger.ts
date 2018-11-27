@@ -1,3 +1,5 @@
+import { EOL } from 'os';
+
 import LogLevel from '../model/LogLevel';
 
 export default class Logger {
@@ -67,7 +69,7 @@ export default class Logger {
     const now = new Date();
     const timestamp = getTimeStamp(now);
     const level = messageLogLevel.toUpperCase();
-    return `[${timestamp}] [${level}] ${this.loggerName} - ${message}\r\n`;
+    return `[${timestamp}] [${level}] ${this.loggerName} - ${message}${EOL}`;
 
     function getTimeStamp(date: Date): string {
       const yyyMmDd = `${date.getFullYear()}-${getMonth(date)}-${getDay(date)}`;
