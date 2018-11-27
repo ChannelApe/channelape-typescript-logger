@@ -43,34 +43,6 @@ describe('Logger', () => {
     expect(stderrWriteSpy.args[0][0]).to.equal(expectedMessage);
   });
 
-  it('error() should log when logLevel is ERROR or above', () => {
-    logger = new Logger('LogName', LogLevel.ERROR);
-    logger.error('error message');
-    const expectedMessage = `[1984-05-07 03:09:05.008] [ERROR] LogName - error message${EOL}`;
-    expect(stderrWriteSpy.args[0][0]).to.equal(expectedMessage);
-  });
-
-  it('warn() should log when logLevel is WARN or above', () => {
-    logger = new Logger('LogName', LogLevel.WARN);
-    logger.warn('warn message');
-    const expectedMessage = `[1984-05-07 03:09:05.008] [WARN] LogName - warn message${EOL}`;
-    expect(stdoutWriteSpy.args[0][0]).to.equal(expectedMessage);
-  });
-
-  it('info() should log when logLevel is INFO or above', () => {
-    logger = new Logger('LogName', LogLevel.INFO);
-    logger.info('info message');
-    const expectedMessage = `[1984-05-07 03:09:05.008] [INFO] LogName - info message${EOL}`;
-    expect(stdoutWriteSpy.args[0][0]).to.equal(expectedMessage);
-  });
-
-  it('debug() should log when logLevel is DEBUG or above', () => {
-    logger = new Logger('LogName', LogLevel.DEBUG);
-    logger.debug('debug message');
-    const expectedMessage = `[1984-05-07 03:09:05.008] [DEBUG] LogName - debug message${EOL}`;
-    expect(stderrWriteSpy.args[0][0]).to.equal(expectedMessage);
-  });
-
   it('no logs should be emitted when when logLevel is OFF', () => {
     logger = new Logger('LogName', LogLevel.OFF);
     logger.error('error message');
