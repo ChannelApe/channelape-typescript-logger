@@ -34,7 +34,10 @@ export default class Logger {
   }
 
   private determineIfLogShouldBeEmitted(logLevel: LogLevel): boolean {
-    if (this.logLevel === LogLevel.VERBOSE || this.logLevel === LogLevel.DEBUG) {
+    if (this.logLevel === LogLevel.DEBUG) {
+      return true;
+    }
+    if (this.logLevel === LogLevel.VERBOSE && logLevel !== LogLevel.DEBUG) {
       return true;
     }
     if (this.logLevel === LogLevel.INFO &&

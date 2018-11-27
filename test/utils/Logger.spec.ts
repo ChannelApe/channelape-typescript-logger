@@ -82,16 +82,16 @@ describe('Logger', () => {
     expect(stderrWriteSpy.called).to.equal(false, 'No logs should have been emitted when debug was called');
   });
 
-  it('all logs should be emitted when when logLevel is VERBOSE', () => {
+  it('only error, warn, and info level logs should be emitted when when logLevel is VERBOSE', () => {
     logger = new Logger('LogName', LogLevel.VERBOSE);
     logger.error('error message');
-    expect(stderrWriteSpy.callCount).to.equal(1, 'All logs should have been emitted');
+    expect(stderrWriteSpy.callCount).to.equal(1, 'only error, warn, and info level logs should be emitted');
     logger.warn('warn message');
-    expect(stdoutWriteSpy.callCount).to.equal(1, 'All logs should have been emitted');
+    expect(stdoutWriteSpy.callCount).to.equal(1, 'only error, warn, and info level logs should be emitted');
     logger.info('info message');
-    expect(stdoutWriteSpy.callCount).to.equal(2, 'All logs should have been emitted');
+    expect(stdoutWriteSpy.callCount).to.equal(2, 'only error, warn, and info level logs should be emitted');
     logger.debug('debug message');
-    expect(stderrWriteSpy.callCount).to.equal(2, 'All logs should have been emitted');
+    expect(stderrWriteSpy.callCount).to.equal(1, 'only error, warn, and info level logs should be emitted');
   });
 
   it('all logs should be emitted when when logLevel is DEBUG', () => {
