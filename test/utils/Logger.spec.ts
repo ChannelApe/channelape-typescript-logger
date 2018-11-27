@@ -29,6 +29,11 @@ describe('Logger', () => {
     done();
   });
 
+  it('constructor should create winston logger with LogLevel of INFO when sent an invalid LogLevel string', () => {
+    logger = new Logger('name', 'INVALID_LOG_LEVEL_VALUE');
+    assertThatOnlyInfoLevelLogsAndAboveAreCalled(logger);
+  });
+
   it('constructor should create winston logger with correct LogLevel when sent a LogLevel string', () => {
     logger = new Logger('name', 'ERROR');
     logger.error('This error is being reported by a logger with a string for a LogLevel');
@@ -135,6 +140,10 @@ describe('Logger', () => {
 
   it('only error, warn, and info level logs should be emitted when when logLevel is INFO', () => {
     logger = new Logger('LogName', LogLevel.INFO);
+    assertThatOnlyInfoLevelLogsAndAboveAreCalled(logger);
+  });
+
+  function assertThatOnlyInfoLevelLogsAndAboveAreCalled(logger: Logger): void {
     logger.error('error message');
     expect(stderrWriteSpy.callCount).to.equal(1, 'only error, warn, and info level logs should be emitted');
     logger.warn('warn message');
@@ -143,5 +152,5 @@ describe('Logger', () => {
     expect(stdoutWriteSpy.callCount).to.equal(2, 'only error, warn, and info level logs should be emitted');
     logger.debug('debug message');
     expect(stderrWriteSpy.callCount).to.equal(1, 'only error, warn, and info level logs should be emitted');
-  });
+  }
 });
