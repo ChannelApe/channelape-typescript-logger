@@ -1,5 +1,3 @@
-import { EOL } from 'os';
-
 import LogLevel from '../model/LogLevel';
 
 export default class Logger {
@@ -28,9 +26,9 @@ export default class Logger {
   private log(logLevel: LogLevel, log: string): void {
     if (this.determineIfLogShouldBeEmitted(logLevel)) {
       if (logLevel === LogLevel.DEBUG || logLevel === LogLevel.ERROR) {
-        process.stderr.write(this.formatLog(log, logLevel));
+        console.error(this.formatLog(log, logLevel));
       } else {
-        process.stdout.write(this.formatLog(log, logLevel));
+        console.log(this.formatLog(log, logLevel));
       }
     }
   }
@@ -69,7 +67,7 @@ export default class Logger {
     const now = new Date();
     const timestamp = getTimeStamp(now);
     const level = messageLogLevel.toUpperCase();
-    return `[${timestamp}] [${level}] ${this.loggerName} - ${message}${EOL}`;
+    return `[${timestamp}] [${level}] ${this.loggerName} - ${message}`;
 
     function getTimeStamp(date: Date): string {
       const yyyMmDd = `${date.getFullYear()}-${getMonth(date)}-${getDay(date)}`;
